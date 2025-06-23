@@ -1,7 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
+const dotenv = require('dotenv');
+const webpack = require('webpack');
 
+// Load correct .env file based on NODE_ENV
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -43,7 +47,7 @@ module.exports = {
     './SecondChild': './src/second-child-comp.jsx' // <--- THIS IS IMPORTANT
   },
    remotes: {
-    host_app: 'host_app@http://localhost:3000/remoteEntry.js',
+    host_app: `host_app@${process.env.REACT_APP_REMOTE_HOST_URL}`,
   },
 shared: {
   react: {
@@ -68,5 +72,9 @@ shared: {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
+    new webpack.DefinePlugin({
+      'process.env.REACT_APP_ENV': JSON.stringify(process.env.REACT_APP_ENV),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+  }),
   ],
 };

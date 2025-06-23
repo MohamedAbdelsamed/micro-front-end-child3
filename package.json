@@ -4,8 +4,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve",
-    "build": "webpack --mode production"
+    "start": "cross-env NODE_ENV=development webpack serve --mode development",
+    "build": "cross-env NODE_ENV=development webpack --mode development",
+    "start:staging": "cross-env NODE_ENV=staging webpack serve --mode staging",
+    "build:staging": "cross-env NODE_ENV=staging webpack --mode staging",
+    "start:production": "cross-env NODE_ENV=production webpack serve --mode production",
+    "build:production": "cross-env NODE_ENV=production webpack --mode production"
   },
   "keywords": [],
   "author": "",
@@ -26,7 +30,9 @@
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
     "babel-loader": "^10.0.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
+    "dotenv": "^16.5.0",
     "html-webpack-plugin": "^5.6.3",
     "style-loader": "^4.0.0",
     "webpack": "^5.99.9",
