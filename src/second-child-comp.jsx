@@ -32,6 +32,7 @@ const MicroFrontend2 = () => {
     headerName: t('Age'),
     type: 'number',
     width: 190,
+    
     align: 'center', headerAlign: 'center'
   },
   {
